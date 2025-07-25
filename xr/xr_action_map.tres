@@ -1,1 +1,101 @@
- 
+[gd_resource type="XRActionMap" format=3 uid="uid://br3n8y6qx5v2w"]
+
+[sub_resource type="XRAction" id="XRAction_1a2bc"]
+resource_name = "trigger_click"
+localized_name = "Trigger Click"
+action_type = 0
+
+[sub_resource type="XRAction" id="XRAction_2d3ef"]
+resource_name = "trigger_touch"
+localized_name = "Trigger Touch"
+action_type = 0
+
+[sub_resource type="XRAction" id="XRAction_3g4hi"]
+resource_name = "grip_click"
+localized_name = "Grip Click"
+action_type = 0
+
+[sub_resource type="XRAction" id="XRAction_4j5kl"]
+resource_name = "primary_click"
+localized_name = "Primary Click"
+action_type = 0
+
+[sub_resource type="XRAction" id="XRAction_5m6no"]
+resource_name = "secondary_click"
+localized_name = "Secondary Click"
+action_type = 0
+
+[sub_resource type="XRAction" id="XRAction_6p7qr"]
+resource_name = "thumbstick_click"
+localized_name = "Thumbstick Click"
+action_type = 0
+
+[sub_resource type="XRAction" id="XRAction_7s8tu"]
+resource_name = "thumbstick_position"
+localized_name = "Thumbstick Position"
+action_type = 1
+
+[sub_resource type="XRAction" id="XRAction_8v9wx"]
+resource_name = "haptic"
+localized_name = "Haptic Feedback"
+action_type = 3
+
+[sub_resource type="XRActionSet" id="XRActionSet_1y2za"]
+resource_name = "default"
+localized_name = "Default"
+priority = 0
+actions = Array[XRAction]([SubResource("XRAction_1a2bc"), SubResource("XRAction_2d3ef"), SubResource("XRAction_3g4hi"), SubResource("XRAction_4j5kl"), SubResource("XRAction_5m6no"), SubResource("XRAction_6p7qr"), SubResource("XRAction_7s8tu"), SubResource("XRAction_8v9wx")])
+
+[sub_resource type="XRInteractionProfile" id="XRInteractionProfile_1b3cd"]
+resource_name = "/interaction_profiles/oculus/touch_controller"
+bindings = Array[XRBinding]([
+  {
+    "action": SubResource("XRAction_1a2bc"),
+    "paths": PackedStringArray("/user/hand/left/input/trigger/click", "/user/hand/right/input/trigger/click")
+  },
+  {
+    "action": SubResource("XRAction_2d3ef"),
+    "paths": PackedStringArray("/user/hand/left/input/trigger/touch", "/user/hand/right/input/trigger/touch")
+  },
+  {
+    "action": SubResource("XRAction_3g4hi"),
+    "paths": PackedStringArray("/user/hand/left/input/squeeze/click", "/user/hand/right/input/squeeze/click")
+  },
+  {
+    "action": SubResource("XRAction_4j5kl"),
+    "paths": PackedStringArray("/user/hand/left/input/x/click", "/user/hand/right/input/a/click")
+  },
+  {
+    "action": SubResource("XRAction_5m6no"),
+    "paths": PackedStringArray("/user/hand/left/input/y/click", "/user/hand/right/input/b/click")
+  },
+  {
+    "action": SubResource("XRAction_6p7qr"),
+    "paths": PackedStringArray("/user/hand/left/input/thumbstick/click", "/user/hand/right/input/thumbstick/click")
+  },
+  {
+    "action": SubResource("XRAction_7s8tu"),
+    "paths": PackedStringArray("/user/hand/left/input/thumbstick", "/user/hand/right/input/thumbstick")
+  },
+  {
+    "action": SubResource("XRAction_8v9wx"),
+    "paths": PackedStringArray("/user/hand/left/output/haptic", "/user/hand/right/output/haptic")
+  }
+])
+
+[sub_resource type="XRInteractionProfile" id="XRInteractionProfile_2e4fg"]
+resource_name = "/interaction_profiles/khr/simple_controller"
+bindings = Array[XRBinding]([
+  {
+    "action": SubResource("XRAction_1a2bc"),
+    "paths": PackedStringArray("/user/hand/left/input/select/click", "/user/hand/right/input/select/click")
+  },
+  {
+    "action": SubResource("XRAction_8v9wx"),
+    "paths": PackedStringArray("/user/hand/left/output/haptic", "/user/hand/right/output/haptic")
+  }
+])
+
+[resource]
+action_sets = Array[XRActionSet]([SubResource("XRActionSet_1y2za")])
+interaction_profiles = Array[XRInteractionProfile]([SubResource("XRInteractionProfile_1b3cd"), SubResource("XRInteractionProfile_2e4fg")])

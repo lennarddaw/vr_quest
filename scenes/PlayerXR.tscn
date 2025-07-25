@@ -1,1 +1,80 @@
- 
+[gd_scene load_steps=6 format=3 uid="uid://cjxqlj5yx5p6w"]
+
+[ext_resource type="Script" path="res://scripts/player_xr.gd" id="1_1a2bc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1d2ef"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1g3hi"]
+albedo_color = Color(1, 0.2, 0.2, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0.2, 1)
+emission_energy = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1j4kl"]
+top_radius = 0.002
+bottom_radius = 0.002
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1m5no"]
+albedo_color = Color(0.2, 0.8, 1, 0.7)
+emission_enabled = true
+emission = Color(0.2, 0.8, 1, 1)
+emission_energy = 0.3
+transparency = 1
+
+[node name="PlayerXR" type="XROrigin3D"]
+script = ExtResource("1_1a2bc")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+collision_layer = 4
+collision_mask = 7
+
+[node name="LeftController" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.2, 0)
+tracker = &"left_hand"
+pose = &"aim"
+
+[node name="LeftHand" type="MeshInstance3D" parent="LeftController"]
+mesh = SubResource("SphereMesh_1d2ef")
+surface_material_override/0 = SubResource("StandardMaterial3D_1g3hi")
+
+[node name="LeftRaycast" type="RayCast3D" parent="LeftController"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+target_position = Vector3(0, 0, -10)
+collision_mask = 6
+collide_with_areas = true
+
+[node name="LeftRayVisual" type="MeshInstance3D" parent="LeftController/LeftRaycast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+visible = false
+mesh = SubResource("CylinderMesh_1j4kl")
+surface_material_override/0 = SubResource("StandardMaterial3D_1m5no")
+
+[node name="RightController" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.2, 0)
+tracker = &"right_hand"
+pose = &"aim"
+
+[node name="RightHand" type="MeshInstance3D" parent="RightController"]
+mesh = SubResource("SphereMesh_1d2ef")
+surface_material_override/0 = SubResource("StandardMaterial3D_1g3hi")
+
+[node name="RightRaycast" type="RayCast3D" parent="RightController"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+target_position = Vector3(0, 0, -10)
+collision_mask = 6
+collide_with_areas = true
+
+[node name="RightRayVisual" type="MeshInstance3D" parent="RightController/RightRaycast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+visible = false
+mesh = SubResource("CylinderMesh_1j4kl")
+surface_material_override/0 = SubResource("StandardMaterial3D_1m5no")
+
+[connection signal="button_pressed" from="LeftController" to="." method="_on_left_controller_button_pressed"]
+[connection signal="button_released" from="LeftController" to="." method="_on_left_controller_button_released"]
+[connection signal="button_pressed" from="RightController" to="." method="_on_right_controller_button_pressed"]
+[connection signal="button_released" from="RightController" to="." method="_on_right_controller_button_released"]

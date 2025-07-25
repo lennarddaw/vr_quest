@@ -1,1 +1,48 @@
- 
+[gd_scene load_steps=2 format=3 uid="uid://c9ewg7y4hx3lm"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_3b4cd"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_3b4cd")
+
+[node name="ScoreDisplay" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScoreLabel" type="Label" parent="ScoreDisplay"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -60.0
+offset_right = 200.0
+offset_bottom = -20.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_1e5fg")
+
+[node name="ObjectiveLabel" type="Label" parent="ScoreDisplay"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+text = "Find the BLUE cube"
+horizontal_alignment = 2
+
+[node name="AudioManager" type="Node" parent="."]
+
+[node name="SuccessAudio" type="AudioStreamPlayer" parent="AudioManager"]
+bus = &"Master"
+
+[node name="ErrorAudio" type="AudioStreamPlayer" parent="AudioManager"]
+bus = &"Master"
+
+[node name="CompletionAudio" type="AudioStreamPlayer" parent="AudioManager"]
+bus = &"Master"

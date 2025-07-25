@@ -1,1 +1,46 @@
- 
+[gd_scene load_steps=5 format=3 uid="uid://da9fg8z5iy4mn"]
+
+[ext_resource type="Script" path="res://scripts/floating_label.gd" id="1_4c5de"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_1f6gh"]
+size = Vector2(3, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1i7jk"]
+flags_transparent = true
+flags_do_not_cull = true
+billboard_mode = 1
+albedo_color = Color(0, 0, 0, 0.7)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1l8mn"]
+font_size = 24
+font_color = Color(1, 1, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="FloatingLabel" type="Node3D"]
+script = ExtResource("1_4c5de")
+
+[node name="BackgroundMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+mesh = SubResource("QuadMesh_1f6gh")
+surface_material_override/0 = SubResource("StandardMaterial3D_1i7jk")
+
+[node name="Label3D" type="Label3D" parent="."]
+billboard = 1
+shaded = false
+double_sided = false
+alpha_cut = 0
+texture_filter = 5
+text = "VR Tutorial Instruction"
+font_size = 48
+outline_size = 4
+outline_modulate = Color(0, 0, 0, 1)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+
+[connection signal="input_event" from="Area3D" to="." method="_input_event"]

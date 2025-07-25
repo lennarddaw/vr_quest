@@ -1,1 +1,101 @@
- 
+[gd_scene load_steps=8 format=3 uid="uid://bq8j5x8gqx5fy"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_0h2ey"]
+[ext_resource type="PackedScene" uid="uid://cjxqlj5yx5p6w" path="res://scenes/PlayerXR.tscn" id="2_3k7xj"]
+[ext_resource type="PackedScene" uid="uid://b8dvf6x3gx2kt" path="res://scenes/GameManager.tscn" id="3_4h8ui"]
+[ext_resource type="Material" uid="uid://dtqmp2e6iwbmr" path="res://materials/floor_material.tres" id="4_5j9vk"]
+
+[sub_resource type="Environment" id="Environment_1x2ey"]
+background_mode = 1
+background_color = Color(0.4, 0.6, 0.9, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.3
+sky_rotation = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1y3ez"]
+size = Vector3(20, 0.2, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1z4fa"]
+size = Vector3(20, 0.2, 20)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_0h2ey")
+
+[node name="PlayerXR" parent="." instance=ExtResource("2_3k7xj")]
+
+[node name="GameManager" parent="." instance=ExtResource("3_4h8ui")]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Environment"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
+mesh = SubResource("BoxMesh_1y3ez")
+surface_material_override/0 = ExtResource("4_5j9vk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
+shape = SubResource("BoxShape3D_1z4fa")
+
+[node name="Lighting" type="Node3D" parent="Environment"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment/Lighting"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 5, 0)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_1x2ey")
+
+[node name="Walls" type="Node3D" parent="Environment"]
+
+[node name="WallNorth" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -10)
+collision_layer = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Walls/WallNorth"]
+mesh = SubResource("BoxMesh_1y3ez")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Walls/WallNorth"]
+shape = SubResource("BoxShape3D_1z4fa")
+
+[node name="WallSouth" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 10)
+collision_layer = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Walls/WallSouth"]
+mesh = SubResource("BoxMesh_1y3ez")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Walls/WallSouth"]
+shape = SubResource("BoxShape3D_1z4fa")
+
+[node name="WallEast" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, 10, 2.5, 0)
+collision_layer = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Walls/WallEast"]
+mesh = SubResource("BoxMesh_1y3ez")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Walls/WallEast"]
+shape = SubResource("BoxShape3D_1z4fa")
+
+[node name="WallWest" type="StaticBody3D" parent="Environment/Walls"]
+transform = Transform3D(6.12323e-17, 0, -1, 0, 1, 0, 1, 0, 6.12323e-17, -10, 2.5, 0)
+collision_layer = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Walls/WallWest"]
+mesh = SubResource("BoxMesh_1y3ez")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Walls/WallWest"]
+shape = SubResource("BoxShape3D_1z4fa")
+
+[node name="Interactables" type="Node3D" parent="."]
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+autoplay = false
+bus = &"Master"

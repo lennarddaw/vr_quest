@@ -1,1 +1,80 @@
- 
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="VR Tutorial Quest"
+config/description="Simple VR Tutorial for Students - Learn VR Development"
+config/version="1.0"
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.2", "Mobile")
+config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/enable=true
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_local_constant=false
+gdscript/warnings/unused_private_class_variable=false
+gdscript/warnings/unused_parameter=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/shadowed_variable=false
+gdscript/warnings/shadowed_global_identifier=false
+gdscript/warnings/unreachable_code=false
+gdscript/warnings/standalone_expression=false
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=2
+window/stretch/mode="viewport"
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194309,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194310,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":32,"echo":false,"script":null)
+]
+}
+ui_cancel={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Interactables"
+3d_physics/layer_3="Player"
+3d_physics/layer_4="UI"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=2
+lights_and_shadows/directional_shadow/size=2048
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+2d/snap/snap_2d_transforms_to_pixel=false
+2d/snap/snap_2d_vertices_to_pixel=false
+
+[xr]
+
+openxr/enabled=true
+openxr/default_action_map="res://xr/xr_action_map.tres"
+openxr/extensions/hand_tracking=true
+openxr/extensions/hand_tracking_frequency=0
+openxr/extensions/passthrough=false
+shaders/enabled=true

@@ -94,7 +94,7 @@ vr_tutorial_quest/
    - Click **Export Project** or **Deploy to Device**
    - Install APK on Quest 3
 
-## 🎮 Gameplay Overview
+## Gameplay Overview
 
 ### Tutorial Flow
 1. **Welcome** - Player spawns in VR room with floating instructions
